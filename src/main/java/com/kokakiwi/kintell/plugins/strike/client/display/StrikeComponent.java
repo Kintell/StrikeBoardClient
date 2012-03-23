@@ -13,7 +13,7 @@ public class StrikeComponent extends Component implements Runnable
 {
     private static final long serialVersionUID = -4923726506283410369L;
     
-    private final StrikeBoard   board;
+    private final StrikeBoard board;
     
     private String            winner           = null;
     private boolean           running          = true;
@@ -59,7 +59,8 @@ public class StrikeComponent extends Component implements Runnable
             String text = "WINNER : " + winner;
             float size = 40.0f;
             
-            Font font = new Font("Ubuntu", Font.BOLD, (int) Math.floor(size));
+            Font font = new Font("Impact Normal", Font.BOLD,
+                    (int) Math.floor(size));
             
             g.setFont(font);
             g.setColor(Color.BLACK);

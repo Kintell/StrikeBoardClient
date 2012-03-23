@@ -24,7 +24,7 @@ import com.kokakiwi.kintell.spec.net.msg.ProgramsListMessage.Program;
 
 public class StrikeBoard extends Board implements Listener
 {
-    public final static int                      WIDTH     = 768;
+    public final static int                      WIDTH     = 1024;
     public final static int                      HEIGHT    = WIDTH * 3 / 4;
     
     private final KintellStrikeBoardClientPlugin plugin;
