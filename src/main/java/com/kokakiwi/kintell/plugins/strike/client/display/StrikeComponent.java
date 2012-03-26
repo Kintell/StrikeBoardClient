@@ -37,39 +37,40 @@ public class StrikeComponent extends Component implements Runnable
         try
         {
             board.getSemaphore().acquire();
-            for (Entity entity : board.getEntities().values())
+            for (final Entity entity : board.getEntities().values())
             {
                 entity.render(g);
             }
             
-            for (String id : board.getRemoved())
+            for (final String id : board.getRemoved())
             {
                 board.getEntities().remove(id);
             }
             board.getRemoved().clear();
             board.getSemaphore().release();
         }
-        catch (InterruptedException e)
+        catch (final InterruptedException e)
         {
             e.printStackTrace();
         }
         
         if (winner != null)
         {
-            String text = "WINNER : " + winner;
-            float size = 40.0f;
+            final String text = "WINNER : " + winner;
+            final float size = 40.0f;
             
-            Font font = new Font("Impact Normal", Font.BOLD,
+            final Font font = new Font("Impact Normal", Font.BOLD,
                     (int) Math.floor(size));
             
             g.setFont(font);
             g.setColor(Color.BLACK);
             
-            FontMetrics metrics = g.getFontMetrics();
+            final FontMetrics metrics = g.getFontMetrics();
             
-            int x = (StrikeBoard.WIDTH / 2)
-                    - (metrics.charsWidth(text.toCharArray(), 0, text.length()) / 2);
-            int y = (int) ((StrikeBoard.HEIGHT / 2) - Math.floor(size / 2));
+            final int x = StrikeBoard.WIDTH / 2
+                    - metrics.charsWidth(text.toCharArray(), 0, text.length())
+                    / 2;
+            final int y = (int) (StrikeBoard.HEIGHT / 2 - Math.floor(size / 2));
             
             g.drawString(text, x, y);
         }
@@ -94,7 +95,7 @@ public class StrikeComponent extends Component implements Runnable
             {
                 Thread.sleep(10L);
             }
-            catch (InterruptedException e)
+            catch (final InterruptedException e)
             {
                 e.printStackTrace();
             }

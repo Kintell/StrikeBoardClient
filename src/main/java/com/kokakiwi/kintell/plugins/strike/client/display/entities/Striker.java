@@ -39,47 +39,48 @@ public class Striker extends Entity
         this.life = life;
     }
     
+    @Override
     public void render(Graphics g)
     {
         System.out.println();
         
-        int x = (int) Math.floor(location.getX());
-        int y = (int) Math.floor(location.getY());
+        final int x = (int) Math.floor(location.getX());
+        final int y = (int) Math.floor(location.getY());
         
         g.setColor(Color.black);
         g.drawOval(x, y, WIDTH, HEIGHT);
         
-        int x0 = (int) (x + (WIDTH / 2) + (WIDTH / 2)
+        int x0 = (int) (x + WIDTH / 2 + WIDTH / 2
                 * Math.cos(Math.toRadians(location.getAngle())));
-        int y0 = (int) (y + (HEIGHT / 2) + (WIDTH / 2)
+        int y0 = (int) (y + HEIGHT / 2 + WIDTH / 2
                 * Math.sin(Math.toRadians(location.getAngle())));
-        int x1 = (int) (x + (WIDTH / 2) + (WIDTH / 2 + 10)
+        final int x1 = (int) (x + WIDTH / 2 + (WIDTH / 2 + 10)
                 * Math.cos(Math.toRadians(location.getAngle())));
-        int y1 = (int) (y + (HEIGHT / 2) + (WIDTH / 2 + 10)
+        final int y1 = (int) (y + HEIGHT / 2 + (WIDTH / 2 + 10)
                 * Math.sin(Math.toRadians(location.getAngle())));
         
         g.drawLine(x0, y0, x1, y1);
         
-        int cx = (int) Math.floor(location.getX() + (WIDTH / 2));
+        final int cx = (int) Math.floor(location.getX() + WIDTH / 2);
         
-        FontMetrics metrics = g.getFontMetrics();
+        final FontMetrics metrics = g.getFontMetrics();
         
-        int textWidth = metrics.charsWidth(id.toCharArray(), 0, id.length());
-        int tx = cx
-                - (textWidth / 2);
+        final int textWidth = metrics.charsWidth(id.toCharArray(), 0,
+                id.length());
+        int tx = cx - textWidth / 2;
         
-        if(tx < 3)
+        if (tx < 3)
         {
             tx = 3;
         }
-        if(tx + textWidth > StrikeBoard.WIDTH - 3)
+        if (tx + textWidth > StrikeBoard.WIDTH - 3)
         {
             tx = StrikeBoard.WIDTH - textWidth - 3;
         }
         
         int ty = y - 20;
         
-        if(ty < metrics.getHeight())
+        if (ty < metrics.getHeight())
         {
             ty = y + HEIGHT + 15;
         }
@@ -92,7 +93,7 @@ public class Striker extends Entity
         g.setColor(Color.LIGHT_GRAY);
         g.fillRect(x0, y0, 40, 5);
         
-        int width = life * 40 / MAXLIFE;
+        final int width = life * 40 / MAXLIFE;
         
         g.setColor(Color.RED);
         g.fillRect(x0, y0, width, 5);

@@ -43,9 +43,9 @@ public class StrikeBoard extends Board implements Listener
         this.plugin = plugin;
         core.registerListener(id, this);
         
-        for (Program program : programs)
+        for (final Program program : programs)
         {
-            Striker striker = new Striker(program);
+            final Striker striker = new Striker(program);
             striker.setLocation(new Location());
             
             strikers.put(program.getId(), striker);
@@ -60,7 +60,7 @@ public class StrikeBoard extends Board implements Listener
         {
             component = new StrikeComponent(this);
             
-            Thread t = new Thread(component);
+            final Thread t = new Thread(component);
             t.start();
         }
         
@@ -112,25 +112,25 @@ public class StrikeBoard extends Board implements Listener
             {
                 semaphore.acquire();
                 
-                UpdateEntity packet = new UpdateEntity();
+                final UpdateEntity packet = new UpdateEntity();
                 packet.decode(msg.getData());
                 
-                Entity entity = entities.get(packet.getId());
+                final Entity entity = entities.get(packet.getId());
                 if (entity != null)
                 {
                     entity.setLocation(packet.getLocation());
                     if (entity instanceof Striker
                             && packet.getDatas().containsKey("life"))
                     {
-                        int life = Integer.valueOf(packet.getDatas()
-                                .get("life"));
+                        final int life = Integer.valueOf(packet.getDatas().get(
+                                "life"));
                         ((Striker) entity).setLife(life);
                     }
                 }
                 
                 semaphore.release();
             }
-            catch (InterruptedException e)
+            catch (final InterruptedException e)
             {
                 e.printStackTrace();
             }
@@ -142,18 +142,18 @@ public class StrikeBoard extends Board implements Listener
             {
                 semaphore.acquire();
                 
-                SpawnEntity packet = new SpawnEntity();
+                final SpawnEntity packet = new SpawnEntity();
                 packet.decode(msg.getData());
                 
                 if (packet.getType().equalsIgnoreCase("bullet"))
                 {
-                    Bullet bullet = new Bullet(packet.getId());
+                    final Bullet bullet = new Bullet(packet.getId());
                     entities.put(bullet.getId(), bullet);
                 }
                 
                 semaphore.release();
             }
-            catch (InterruptedException e)
+            catch (final InterruptedException e)
             {
                 e.printStackTrace();
             }
@@ -164,21 +164,21 @@ public class StrikeBoard extends Board implements Listener
             {
                 semaphore.acquire();
                 
-                RemoveEntity packet = new RemoveEntity();
+                final RemoveEntity packet = new RemoveEntity();
                 packet.decode(msg.getData());
                 
                 removed.add(packet.getId());
                 
                 semaphore.release();
             }
-            catch (InterruptedException e)
+            catch (final InterruptedException e)
             {
                 e.printStackTrace();
             }
         }
         else if (msg.getOpcode().equalsIgnoreCase("win"))
         {
-            Win packet = new Win(null);
+            final Win packet = new Win(null);
             packet.decode(msg.getData());
             
             component.win(packet.getId());

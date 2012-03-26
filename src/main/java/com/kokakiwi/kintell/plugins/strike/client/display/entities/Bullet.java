@@ -18,8 +18,8 @@ public class Bullet extends Entity
     @Override
     public void render(Graphics g)
     {
-        int x = (int) Math.floor(location.getX() - (WIDTH / 2));
-        int y = (int) Math.floor(location.getY() - (HEIGHT / 2));
+        final int x = (int) Math.floor(location.getX() - WIDTH / 2);
+        final int y = (int) Math.floor(location.getY() - HEIGHT / 2);
         
         g.setColor(Color.BLACK);
         g.fillOval(x, y, WIDTH, HEIGHT);
